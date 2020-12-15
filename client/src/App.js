@@ -7,16 +7,17 @@ import About from "./pages/About";
 import Footer from "./components/Footer";
 import Rules from "./pages/Rules";
 import CommunityPosts from "./pages/CommunityPosts";
-import CreatePost from "./pages/CreatePost";
+import CreatePost from "./pages/CreatePost";  //create post should not originate here...
 import { Container, Col, Row } from 'react-bootstrap';
-
 import * as API from "./utils/API";
 import AuthService from "./utils/auth";
-
 import "./index.css";
-
 // import our context object for state
 import UserInfoContext from "./utils/UserInfoContext";
+
+
+
+// there needs to be a login function on this file so that we can redirect based on whether user is logged in
 
 function App() {
   // set data to be used for UserInfoContext and make it available to all other components
@@ -79,6 +80,7 @@ function App() {
       <div className="footer-push"></div>
       <Footer />
     </Container>
+
   );
 }
 

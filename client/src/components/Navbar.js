@@ -18,7 +18,7 @@ function AppNavbar() {
   return (
     <>
       <Navbar bg='light' variant='light' expand='lg'>
-      <Col>
+        <Col>
           <Image className="logo1" src={require("./assets/img/logo1.png")} /></Col>
         <Container>
           <Navbar className="nav-main" as={Link} to='/'>
@@ -35,27 +35,27 @@ function AppNavbar() {
                   <Nav.Link onClick={AuthService.logout}>Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login | Sign Up</Nav.Link>
-              )}
+                  <Nav.Link onClick={() => setShowModal(true)}>Login | Sign Up</Nav.Link>
+                )}
             </Nav>
             <Nav className="mr-right">
-      <NavDropdown title="Search Posts" id="basic-nav-dropdown">
-        {/* <NavDropdown.Item href="#action/3.1">Dates</NavDropdown.Item>
+              <NavDropdown title="Search Posts" id="basic-nav-dropdown">
+                {/* <NavDropdown.Item href="#action/3.1">Dates</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Marriage</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Break Ups</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">LGBTQ+</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Women</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Men</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Just Friends</NavDropdown.Item> */}
-        <NavDropdown.Item className="ViewPosts" as={Link} to='/CommunityPosts'>Browse</NavDropdown.Item>
-      </NavDropdown>
-    </Nav>
+                <NavDropdown.Item className="ViewPosts" as={Link} to='/CommunityPosts'>Browse</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
             <Navbar className="about-link" as={Link} to='/about'>
-                <i className="fas fa-info-circle"></i></Navbar>
+              <i className="fas fa-info-circle"></i></Navbar>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* set modal data up */}
+      {/* set modal data up - this might need to be a new component*/}
       <Modal size='lg' show={showModal} onHide={() => setShowModal(false)} aria-labelledby='signup-modal'>
         {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey='login'>

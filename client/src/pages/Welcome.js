@@ -1,14 +1,26 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Container, Nav, NavDropdown, Form, Button, Card, CardColumns } from "react-bootstrap";
+import { Container, Nav, NavDropdown, Form, Button, Card, CardColumns, Modal, Tab,  } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import UserInfoContext from "../utils/UserInfoContext";
 import AuthService from "../utils/auth";
 import { saveBook, searchGoogleBooks } from "../utils/API";
-
 import "./style.css";
+
+import LoginForm from '../components/LoginForm';
+import SignUpForm from '../components/SignupForm';
+
+//welcome page is the default page new users sent to
+//this page can be fixed by changing Create Post button to a Login Button?
+//I want this to show login, signup or what?
+//...profile page?! /usersavedposts is closest for now
+
 
 
 function Welcome() {
+//new things:
+const [showModal, setShowModal] = useState(false);
+
+  //
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -50,7 +62,7 @@ function Welcome() {
       .catch((err) => console.log(err));
   };
   // END OF BOOKS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  // BEGIN POST section   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // BEGIN WELCOME section   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   return (
     <>
       <hr></hr>
@@ -68,50 +80,42 @@ function Welcome() {
         <Form onSubmit={handleFormSubmit}>
           <Form.Row>
             <Card.Body className="buttons-card">
-              <Button className="create-post-link" as={Link} to='/createpost' variant="outline-secondary">Create Post</Button>{' '}
+              <Button className="create-post-link" variant="outline-secondary" onClick={() => setShowModal(true)}>Login | Sign Up</Button>{' '}
               {/* <Link className="create-post-link" as={Link} to='/createpost'> create post </Link> */}
             </Card.Body>
           </Form.Row>
         </Form>
       </Container>
+      {/* below is WIP */}
 
-      <Container>
-        {/* <h2>{searchedBooks.length ? `Viewing ${searchedBooks.length} results:` : ''}</h2> */}
-        <CardColumns>
-          {searchedBooks.map((book) => {
-            return (
-              <Card key={book.bookId} border="none">
-                {/* book image code - not relevent to our app but saving just in case */}
-                {/* {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null} */}
-                <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className="small">user: {book.authors}</p>
-                  <Card.Text>
-                    {/* this is where the post text body should go */}
-                    {book.description}
-                  </Card.Text>
-                  {userData.username && (
-                    <Button
-                      // like post with a heart of reply
-                      disabled={userData.savedBooks?.some(
-                        (savedBook) => savedBook.bookId === book.bookId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveBook(book.bookId)}
-                    >
-                      {userData.savedBooks?.some(
-                        (savedBook) => savedBook.bookId === book.bookId
-                      )
-                        ? "This book has already been saved!"
-                        : "Save this Book!"}
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardColumns>
-      </Container>
+      <Modal size='lg' show={showModal} onHide={() => setShowModal(false)} aria-labelledby='signup-modal'>
+        {/* tab container to do either signup or login component */}
+        <Tab.Container defaultActiveKey='login'>
+          <Modal.Header closeButton>
+            <Modal.Title id='signup-modal'>
+              <Nav variant='pills'>
+                <Nav.Item>
+                  <Nav.Link eventKey='login'>Login</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tab.Content>
+              <Tab.Pane eventKey='login'>
+                <LoginForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+              <Tab.Pane eventKey='signup'>
+                <SignUpForm handleModalClose={() => setShowModal(false)} />
+              </Tab.Pane>
+            </Tab.Content>
+          </Modal.Body>
+        </Tab.Container>
+      </Modal>
+
     </>
   );
 }
