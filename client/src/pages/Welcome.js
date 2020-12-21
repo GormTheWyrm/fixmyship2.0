@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Container, Nav, NavDropdown, Form, Button, Card, CardColumns, Modal, Tab,  } from "react-bootstrap";
+import { Container, Nav, NavDropdown, Form, Button, Card, CardColumns, Modal, Tab, } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import UserInfoContext from "../utils/UserInfoContext";
 import AuthService from "../utils/auth";
@@ -17,8 +17,10 @@ import SignUpForm from '../components/SignupForm';
 
 
 function Welcome() {
-//new things:
-const [showModal, setShowModal] = useState(false);
+  //new things:
+  console.log('AuthService');
+  console.log(AuthService.loggedIn());
+  const [showModal, setShowModal] = useState(false);
 
   //
   // create state for holding returned google api data
@@ -77,14 +79,20 @@ const [showModal, setShowModal] = useState(false);
           <br></br>
           <i className="fas fa-anchor fa-3x"></i>
         </p>
-        <Form onSubmit={handleFormSubmit}>
-          <Form.Row>
-            <Card.Body className="buttons-card">
-              <Button className="create-post-link" variant="outline-secondary" onClick={() => setShowModal(true)}>Login | Sign Up</Button>{' '}
-              {/* <Link className="create-post-link" as={Link} to='/createpost'> create post </Link> */}
-            </Card.Body>
-          </Form.Row>
-        </Form>
+        {/* ternary to change login to create post when logged in */}
+        {AuthService.loggedIn() ?
+          <Card.Body className="buttons-card">
+            <Link className="create-post-link" as={Link} to='/createpost'> create post </Link>
+          </Card.Body>
+          :
+          <Form onSubmit={handleFormSubmit}>
+            <Form.Row>
+              <Card.Body className="buttons-card">
+                <Button className="create-post-link" variant="outline-secondary" onClick={() => setShowModal(true)}>Login | Sign Up</Button>{' '}
+              </Card.Body>
+            </Form.Row>
+          </Form>
+        }
       </Container>
       {/* below is WIP */}
 
@@ -121,3 +129,7 @@ const [showModal, setShowModal] = useState(false);
 }
 
 export default Welcome;
+
+// I need to update this so that it shows a create post button when logged in!
+//I also need a create post button in header
+//...Authservice.loggedIn !

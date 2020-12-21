@@ -39,7 +39,7 @@ function AppNavbar() {
                 )}
             </Nav>
             <Nav className="mr-right">
-              <NavDropdown title="Search Posts" id="basic-nav-dropdown">
+              <NavDropdown title="ACTIONS" id="basic-nav-dropdown">
                 {/* <NavDropdown.Item href="#action/3.1">Dates</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Marriage</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Break Ups</NavDropdown.Item>
@@ -47,7 +47,9 @@ function AppNavbar() {
         <NavDropdown.Item href="#action/3.3">Women</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Men</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Just Friends</NavDropdown.Item> */}
-                <NavDropdown.Item className="ViewPosts" as={Link} to='/CommunityPosts'>Browse</NavDropdown.Item>
+                <NavDropdown.Item className="ViewPosts" as={Link} to='/CommunityPosts'>Browse Posts</NavDropdown.Item>
+                <NavDropdown.Item className="ViewPosts" as={Link} to='/Createpost'>Create Post</NavDropdown.Item>
+                {/* <Link className="create-post-link" as={Link} to='/createpost'> create post </Link> */}
               </NavDropdown>
             </Nav>
             <Navbar className="about-link" as={Link} to='/about'>

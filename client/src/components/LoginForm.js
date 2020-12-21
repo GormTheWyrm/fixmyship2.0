@@ -85,3 +85,5 @@ function LoginForm({ handleModalClose }) {
 }
 
 export default LoginForm;
+
+//need to create an error for the user when there is an error
