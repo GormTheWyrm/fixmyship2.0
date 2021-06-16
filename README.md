@@ -36,7 +36,7 @@ SO that I can offer help and solicit advice to a community of users.
 
 #### Deployment Link
 
-https://fixmyship20.herokuapp.com/
+https://fixmyship-gorm.herokuapp.com/
 
 #### Initializing App Locally
 
