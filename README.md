@@ -1,5 +1,8 @@
 ## Fix My 'Ship
-
+Try out the app at
+https://fixmyship-gorm.herokuapp.com/
+<br>
+Please allow a couple of minutes for application to boot up since it is hosted on free heroku server.
 ### About
 
 A full stack web application where a user can login and interact with an online community to get and give relationship advice.
